@@ -7,6 +7,7 @@
     [ring-server "0.3.0"]]
   :plugins [
     [lein-ring "0.8.7"]]
+  ;using leins's ring plugin
   :ring {
     :handler ring-hello-world.handler/app
     :init ring-hello-world.handler/init

@@ -9,6 +9,7 @@
 (defn destroy []
   (println "ring-hello-world is shutting down"))
 
+;request is a map
 (defn handler [request]
   (response
     (str "<html><body>Hello World</br>The Request contains:</br>"
