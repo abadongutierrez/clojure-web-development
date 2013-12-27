@@ -1,8 +1,7 @@
 (ns ring-hello-world.handler
   (:require [ring.util.response :refer [response]]
-            [ring.middleware.content-type]
-            [ring.middleware.keyword-params]
-            [ring.middleware.params]))
+            [ring.middleware.keyword-params :refer [wrap-keyword-params]]
+            [ring.middleware.params :refer [wrap-params]]))
 
 (defn init []
   (println "ring-hello-world is starting"))
@@ -24,5 +23,5 @@
 (def app
   (-> handler
     (wrap-content-type "text/html")
-    (ring.middleware.keyword-params/wrap-keyword-params)
-    (ring.middleware.params/wrap-params)))
+    (wrap-keyword-params)
+    (wrap-params)))
