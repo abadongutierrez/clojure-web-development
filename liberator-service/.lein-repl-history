@@ -1,0 +1,24 @@
+(start-server)
+(load liberator-service.repl( 
+(load liberator-service.repl(
+(load liberator-service.repl)
+(load-file src/liberator
+(load-file src/liberator_service/repl.clj)
+(load-file src/liberato-service/repl.clj)
+(use 'liberator-service.repl
+)
+(start-server)
+(stop-server)
+(use 'liberator-service.repl :reload-all)
+(start-server)
+(use 'liberator-service.routes.home :reload-all)
+(use 'liberator-service.repl :reload-all)
+(use 'liberator-service.routes.home :reload-all)
+(stop-server)
+(use 'liberator-service.repl :reload-all)
+(start-server)
+(stop-server)
+(use 'liberator-service.routes.home :reload-all)
+(use 'liberator-service.repl :reload-all)
+(start-server)
+exit
