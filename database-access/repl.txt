@@ -1,0 +1,13 @@
+;; Anything you type in here will be executed
+;; immediately with the results shown on the
+;; right.
+;(use 'database-access.models.db :reload)
+;(use 'database-access.reports :reload)
+;(use 'database-access.repl  :reload)
+;(update-user-pass "rafael2" "pass3")
+;(delete-user "rafael2")
+;(create-employee-table)
+;(insert-rows)
+;(read-employees)
+;(start-server)
+;(stop-server)
