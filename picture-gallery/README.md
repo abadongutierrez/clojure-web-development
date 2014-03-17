@@ -2,6 +2,10 @@
 
 An example web application using Clojure.
 
+This example is taken from the book Web Development with Clojure.
+
+Task C: Uploading Pictures -> Generatign Thumbnails
+
 ## Prerequisites
 
 You will need [Leiningen][1] 1.7.0 or above installed.

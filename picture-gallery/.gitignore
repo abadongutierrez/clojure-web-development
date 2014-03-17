@@ -10,3 +10,8 @@ pom.xml
 .lein-plugins
 .lein-env
 .lein-repl-history
+**/.gradle
+**/.idea
+**/*.iml
+**/classes
+**/target
