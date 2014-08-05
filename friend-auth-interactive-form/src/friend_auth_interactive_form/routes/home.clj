@@ -20,7 +20,7 @@
 
 (defn home [req]
   (layout/render-page "index" {
-    :message "Hello there!"
+    :message "Friend Interactive Form Example"
     :logged-message (if-let [identity (friend/identity req)]
                         (apply str "Logged in, with these roles: " (-> identity friend/current-authentication :roles))
                         "anonymous user")
@@ -36,19 +36,25 @@
   (GET "/logout" req
     (friend/logout* (resp/redirect (str (:context req) "/"))))
   (GET "/requires-authentication" req
-    (friend/authenticated "Thanks for authenticating!"))
+    (friend/authenticated (layout/render-page "message" {:message "Thanks for authenticating!"})))
   (GET "/role-user" req
-    (friend/authorize #{::user} "You're a user!"))
+    (friend/authorize #{::user} (layout/render-page "message" {:message "You're a user!"})))
   (GET "/role-admin" req
-    (friend/authorize #{::admin} "You're an admin!")))
+    (friend/authorize #{::admin} (layout/render-page "message" {:message "You're an admin!"}))))
+
+(defn verify-credentials [creds]
+    (let [valid-user (creds/bcrypt-credential-fn @users creds)]
+        (println (str "Verifying Credentials: " creds))
+        (println (str "Valid user: " valid-user))
+        valid-user))
 
 (def page (friend/authenticate
               home-routes
               {:allow-anon? true
                :login-uri "/login"
                :default-landing-uri "/"
-               :unauthorized-handler #(-> (layout/render-page "message" {:message "You do not have sufficient privileges to access " :uri (:uri %)})
+               :unauthorized-handler #(-> (layout/render-page "message" {:message (str "You do not have sufficient privileges to access " (:uri %))})
                                         resp/response
                                         (resp/status 401))
-               :credential-fn #(creds/bcrypt-credential-fn @users %)
+               :credential-fn #(verify-credentials %)
                :workflows [(workflows/interactive-form)]}))
