@@ -1,0 +1,15 @@
+<html>
+<body>
+    <h1>{{message}}</h1>
+    {{^logged-in}}
+    <div><a href="/login">Login</a></div>
+    {{/logged-in}}
+    {{#logged-in}}
+    <div><a href="/logout">Logout</a></div>
+    <div><a href="/requires-authentication">Requires Authentication</a></div>
+    <div><a href="/role-user">Only users with 'user' role</a></div>
+    <div><a href="/role-admin">Only users with 'admin' role</a></div>
+    {{/logged-in}}
+    <p>{{logged-message}}</p>
+</body>
+</html>
