@@ -23,7 +23,7 @@
   (layout/render-page "index" {
     :message "Friend Interactive Form Example"
     :logged-message (if-let [identity (friend/identity req)]
-                        (apply str "Logged in, with these roles: " (-> identity friend/current-authentication :roles))
+                        (apply str "Logged in, with these roles: " (interpose ", " (-> identity friend/current-authentication :roles)))
                         "anonymous user")
     :logged-in (not (nil? (friend/identity req)))
     }))
@@ -39,9 +39,9 @@
   (GET "/requires-authentication" req
     (friend/authenticated (layout/render-page "message" {:message "Thanks for authenticating!"})))
   (GET "/role-user" req
-    (friend/authorize #{::user} (layout/render-page "message" {:message "You're a user!"})))
+    (friend/authorize #{"user"} (layout/render-page "message" {:message "You're a user!"})))
   (GET "/role-admin" req
-    (friend/authorize #{::admin} (layout/render-page "message" {:message "You're an admin!"}))))
+    (friend/authorize #{"admin"} (layout/render-page "message" {:message "You're an admin!"}))))
 
 (defn verify-credentials [creds]
     (let [valid-user (creds/bcrypt-credential-fn @users creds)]
