@@ -23,7 +23,8 @@
   (layout/render-page "index" {
     :message "Friend Interactive Form Example"
     :logged-message (if-let [identity (friend/identity req)]
-                        (apply str "Logged in, with these roles: " (interpose ", " (-> identity friend/current-authentication :roles)))
+                        (apply str "Logged in, with these roles: "
+                            (interpose ", " (-> identity friend/current-authentication :roles)))
                         "anonymous user")
     :logged-in (not (nil? (friend/identity req)))
     }))
